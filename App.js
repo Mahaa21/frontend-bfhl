@@ -11,17 +11,19 @@ function App() {
     setJsonInput(e.target.value);
   };
 
+
   const handleSubmit = async () => {
-    try {
-      const parsedData = JSON.parse(jsonInput);
-      const result = await axios.post('https://your-api-url.herokuapp.com/bfhl', parsedData);
-      setResponse(result.data);
-      setError('');
-    } catch (err) {
-      setError('Invalid JSON or API Error');
-      setResponse(null);
-    }
-  };
+  try {
+    const parsedData = JSON.parse(jsonInput);
+    const result = await axios.post('http://127.0.0.1:5000/bfhl', { data: parsedData.data });
+    setResponse(result.data);
+    setError('');
+  } catch (err) {
+    setError('Invalid JSON or API Error');
+    setResponse(null);
+  }
+};
+
 
   const handleOptionChange = (e) => {
     const value = Array.from(e.target.selectedOptions, option => option.value);
